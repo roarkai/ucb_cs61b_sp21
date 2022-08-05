@@ -5,7 +5,7 @@ import java.util.Observable;
 
 
 /** The state of a game of 2048.
- *  @author TODO: YOUR NAME HERE
+ *  @roark_alex
  */
 public class Model extends Observable {
     /** Current contents of the board. */
@@ -106,6 +106,82 @@ public class Model extends Observable {
      *    value, then the leading two tiles in the direction of motion merge,
      *    and the trailing tile does not.
      * */
+
+    // t是side视角下board.tile(col, row)在North视角的tile
+   private int nextPosi(int icol, int irow, Tile t){
+        Tile temp;
+        int col = icol;
+        int row = irow + 1;
+        int len = board.size();
+
+        while(row < len){
+            temp = board.tile(col, row);
+            if(temp == null || temp.value() == t.value()) {
+                row++;
+            } else {
+                break;
+            }
+        }
+        return row - 1;
+    }
+
+    private int nextNullPosi(int icol, int irow, Tile t){
+        Tile temp;
+        int col = icol;
+        int row = irow + 1;
+        int len = board.size();
+
+        while(row < len){
+            temp = board.tile(col, row);
+            if(temp == null) {
+                row++;
+            } else {
+                break;
+            }
+        }
+        return row - 1;
+    }
+
+    private boolean tiltCol(int icol){
+        // 初始化标记符
+        // mergeFlag==1标记上一行做了合并，mergeFlag==0标记上一行没有合并
+        boolean changed = false;
+        boolean mergeFlag = false;
+
+        // 遍历side方向上，icol列中的行，方向从远到近
+        int len = board.size();
+        for(int irow = len - 2; irow >= 0; irow--){
+            Tile t = board.tile(icol, irow);
+            if(t == null) {
+                continue;
+            } else {
+                int targetRow;
+                // 如果上一行的tile有合并操作，那么这一行只移动不合并
+                // 如果上一行的tile没有合并操作，那么这一行可以合并
+                if(!mergeFlag) {
+                    // 找到tile的下一个位置
+                    targetRow = nextPosi(icol, irow, t);
+                    // 执行merge，或者move，或者什么都不做，如果merge，设置flag
+                    mergeFlag = board.move(icol, targetRow, t);
+                    // 如果merge，改变score
+                    if(mergeFlag)
+                        score += board.tile(icol, targetRow).value();
+                }else{
+                    // 找到tile的下一个位置
+                    targetRow = nextNullPosi(icol, irow, t);
+                    // move，或者什么都不做
+                    board.move(icol, targetRow, t);
+                    // 设置flag
+                    mergeFlag = false;
+                }
+                // 提示changed
+                if(targetRow != irow)
+                    changed = true;
+            }
+        }
+        return changed;
+    }
+
     public boolean tilt(Side side) {
         boolean changed;
         changed = false;
@@ -114,6 +190,21 @@ public class Model extends Observable {
         // for the tilt to the Side SIDE. If the board changed, set the
         // changed local variable to true.
 
+        // 设定方向
+        board.setViewingPerspective(side);
+
+        int len = board.size();
+
+
+        // 遍历side方向上的列
+        for(int icol = 0; icol < len; icol++){
+            boolean changedCol = tiltCol(icol);
+            if(changedCol)
+                changed = true;
+        }
+
+        // 还原方向设定
+        board.setViewingPerspective(Side.NORTH);
         checkGameOver();
         if (changed) {
             setChanged();
@@ -138,6 +229,13 @@ public class Model extends Observable {
      * */
     public static boolean emptySpaceExists(Board b) {
         // TODO: Fill in this function.
+        int len = b.size();
+        for (int i = 0; i < len; i++)
+            for(int j = 0; j < len; j++){
+                Tile t = b.tile(i, j);
+                if(t == null)
+                    return true;
+            }
         return false;
     }
 
@@ -148,6 +246,13 @@ public class Model extends Observable {
      */
     public static boolean maxTileExists(Board b) {
         // TODO: Fill in this function.
+        int len = b.size();
+        for(int i = 0; i< len; i++)
+            for(int  j=0; j< len ;j++){
+                Tile t = b.tile(i, j);
+                if(t != null && t.value() == MAX_PIECE)
+                    return true;
+            }
         return false;
     }
 
@@ -157,8 +262,33 @@ public class Model extends Observable {
      * 1. There is at least one empty space on the board.
      * 2. There are two adjacent tiles with the same value.
      */
+
+    private static boolean adjacentSameTileExist(Board b){
+        int len = b.size();
+        for(int i = 0; i < len; i++)
+            for(int j = 0; j < len; j++){
+                Tile t = b.tile(j, i);
+                if(j + 1 < len){
+                    Tile belowt = b.tile(j+1, i);
+                    if(t.value() == belowt.value())
+                     return true;
+                }
+                if(i + 1 < len) {
+                    Tile leftt = b.tile(j, i + 1);
+                    if (t.value() == leftt.value())
+                        return true;
+                }
+            }
+        return false;
+    }
+
     public static boolean atLeastOneMoveExists(Board b) {
         // TODO: Fill in this function.
+        if(emptySpaceExists(b)){
+            return true;
+        }else if(adjacentSameTileExist(b)){
+            return true;
+        }
         return false;
     }
 
