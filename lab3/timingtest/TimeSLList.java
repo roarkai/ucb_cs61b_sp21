@@ -21,8 +21,44 @@ public class TimeSLList {
         timeGetLast();
     }
 
+    private  static void addNItems(SLList<Integer> testS, int n){
+        for(int i = 0; i < n; i++)
+            testS.addFirst(i);
+    }
+
+    private  static void getLastMTimes(SLList<Integer> testS, int m){
+        int lastele;
+        for (int i = 0; i < m; i++)
+            lastele = testS.getLast();
+    }
+
     public static void timeGetLast() {
-        // TODO: YOUR CODE HERE
+        // create tablea items
+        AList<Integer> Ns = new AList<>();
+        AList<Double> times = new AList<>();
+        AList<Integer> ops = new AList<>();
+         // 初始化Ns
+        int max = 128000;
+        for (int k = 1000; k <= max; k = k*2) {
+            Ns.addLast(k);
+        }
+
+        // time the ops
+        int M = 10000;
+        for(int n = 0; n < Ns.size(); n++){
+            SLList<Integer> testS = new SLList<>();
+            addNItems(testS, Ns.get(n));
+
+            Stopwatch sw = new Stopwatch();
+            getLastMTimes(testS, M);
+            double timeInSeconds = sw.elapsedTime();
+            
+            times.addLast(timeInSeconds);
+            ops.addLast(M);
+        }
+
+        printTimingTable(Ns, times, ops);
+
     }
 
 }
