@@ -46,7 +46,7 @@ public class LinkedListDeque<T> implements Iterable<T> {
 	/** Inserts item into the front of the Deque.
 	 *  If item is null, do nothing. @return void.  */
 	public void addFirst(T item){
-		if(item == null) {
+		if (item == null) {
 			return;
 		} else {
 			insertNode(item, sentiFront);
@@ -76,7 +76,7 @@ public class LinkedListDeque<T> implements Iterable<T> {
 	/** Removes and returns the item at the front of the Deque.
 	 *  @return the items removed.  */
     public T removeFirst() {
-    	if(size == 0) {
+    	if (size == 0) {
     		return null;
     	}
     	T first = removeNext(sentiFront);
@@ -87,7 +87,7 @@ public class LinkedListDeque<T> implements Iterable<T> {
 	/** Removes and returns the item at the back of the Deque.
 	 *  @return the items removed.  */
     public T removeLast() {
-        if(size == 0) {
+        if (size == 0) {
     		return null;
     	}
     	T last = removeNext(sentiBack.prevDNode.prevDNode);
@@ -98,13 +98,13 @@ public class LinkedListDeque<T> implements Iterable<T> {
     /** @return the item at the given index. If non-exist @return null.
      *  0 is the Front, use iterate. */
     public T get(int index) {
-    	if(index > size) {
+    	if (index > size) {
     		return null;
     	}
 
         DNode<T> firstNode = sentiFront.nextDNode;
         DNode<T> ithNode = firstNode;
-        for(int i = 0; i < index; i++) {
+        for (int i = 0; i < index; i++) {
             ithNode = ithNode.nextDNode;
     	}
     	return ithNode.item;
@@ -131,7 +131,7 @@ public class LinkedListDeque<T> implements Iterable<T> {
 		}
 
 		DNode<T> node = sentiFront;
-		for(int i = 0; i < size - 1; i++) {
+		for (int i = 0; i < size - 1; i++) {
 			node = node.nextDNode;
 			System.out.print(node.item + " ");
 		}
