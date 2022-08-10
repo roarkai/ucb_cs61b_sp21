@@ -1,6 +1,8 @@
 package deque;
 
-public class LinkedListDeque<T> {
+import java.util.Iterator;
+
+public class LinkedListDeque<T> implements Iterable<T> {
 
 	/** nest class DNode, each node has two ref, 
 	 *  one for prevNode, the other for nextNode */
@@ -145,4 +147,23 @@ public class LinkedListDeque<T> {
 	public boolean isEmpty() {
 		return size == 0;
 	}
+
+	/** create class myLLDIterator which implements interface Iterator  */
+	private class MyLLDIterator implements Iterator<T> {
+		private int posi = 0;
+		public boolean hasNext() {
+			return posi < size;
+		}
+		public T next() {
+			T returnItem = get(posi);
+			posi++;
+			return returnItem;
+		}
+	}
+	/** implements the iterator method in interface Iterable */
+	public Iterator<T> iterator() {
+		return new MyLLDIterator();
+	}
+
+
 }
