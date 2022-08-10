@@ -71,8 +71,6 @@ public class LinkedListDequeTest {
     @Test
     /* Check if you can create LinkedListDeques with different parameterized types*/
     public void multipleParamTest() {
-
-        /*
         LinkedListDeque<String>  lld1 = new LinkedListDeque<String>();
         LinkedListDeque<Double>  lld2 = new LinkedListDeque<Double>();
         LinkedListDeque<Boolean> lld3 = new LinkedListDeque<Boolean>();
@@ -84,7 +82,6 @@ public class LinkedListDequeTest {
         String s = lld1.removeFirst();
         double d = lld2.removeFirst();
         boolean b = lld3.removeFirst();
-        */
     }
 
     @Test
@@ -113,5 +110,50 @@ public class LinkedListDequeTest {
         for (double i = 999999; i > 500000; i--) {
             assertEquals("Should have the same value", i, (double) lld1.removeLast(), 0.0);
         }
+    }
+
+    @Test
+        public void equalLLDStringTest() {
+
+
+        LinkedListDeque<String> lld1 = new LinkedListDeque<>();
+        LinkedListDeque<String> lld2 = new LinkedListDeque<>();
+
+        // saem obj
+        LinkedListDeque<String> lld4 = lld1;
+        boolean equalstring14 = lld1.equals(lld4);
+        assertEquals(true, equalstring14);
+
+        // empty DDL
+        boolean equalstring12 = lld1.equals(lld2);
+        assertEquals(true, equalstring12);
+
+		lld1.addFirst("front");
+		lld1.addLast("middle");
+		lld1.addLast("back");
+
+        lld2.addFirst("front");
+		lld2.addLast("middle");
+		lld2.addLast("back");
+
+        // same elements
+        equalstring12 = lld1.equals(lld2);
+        assertEquals(true, equalstring12);
+
+        // different size
+        LinkedListDeque<String> lld3 = new LinkedListDeque<>();
+        lld3.addFirst("front");
+		lld3.addLast("middle");
+
+        boolean equalstring23 = lld2.equals(lld3);
+        assertEquals(false, equalstring23);
+
+        // different type
+        LinkedListDeque<Integer> lld5 = new LinkedListDeque<>();
+        lld5.addFirst(1);
+		lld5.addLast(2);
+
+        boolean equalstring35 = lld3.equals(lld5);
+        assertEquals(false, equalstring35);
     }
 }

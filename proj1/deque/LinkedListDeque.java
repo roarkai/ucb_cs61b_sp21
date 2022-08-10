@@ -165,5 +165,38 @@ public class LinkedListDeque<T> implements Iterable<T> {
 		return new MyLLDIterator();
 	}
 
+	@Override
+	public boolean equals(Object other) {
+		// refer to the same obj on heap
+		if(this == other) {
+			return true;
+		}
 
+		// special case
+		if(other == null) {
+			return false;
+		}
+
+		// same class
+		if (this.getClass() != other.getClass()) {
+			System.out.println("different calss.");
+			return false;
+		}
+
+		// same size
+		LinkedListDeque<T> target = (LinkedListDeque<T>) other;
+		if (this.size() != target.size()) {
+			return false;
+		}
+
+		// same elements and order
+		DNode<T> thisNode = this.sentiFront.nextDNode;
+		DNode<T> targNode = target.sentiFront.nextDNode;
+		for (int i = 0; i < size; i++) {
+			if (!thisNode.item.equals(targNode.item)) {
+				return false;
+			}
+		}
+		return true;
+	}
 }
