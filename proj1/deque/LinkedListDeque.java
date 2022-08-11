@@ -120,7 +120,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
         if (index == 0) {
             return startInd.item;
         } else {
-            nextInd = startInd.nextDNode;
+            DNode nextInd = startInd.nextDNode;
             return getRecursive(index - 1, nextInd);
         }
     }
