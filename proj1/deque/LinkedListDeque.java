@@ -92,7 +92,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
     public T removeLast() {
         if (size == 0) {
             return null;
-    	}
+        }
         T last = removeNext(sentiBack.prevDNode.prevDNode);
         size--;
         return last;
@@ -102,16 +102,16 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
      *  0 is the Front, use iterate. */
     @Override
     public T get(int index) {
-    	if (index > size) {
-    		return null;
-    	}
+        if (index > size) {
+            return null;
+        }
 
         DNode firstNode = sentiFront.nextDNode;
         DNode ithNode = firstNode;
         for (int i = 0; i < index; i++) {
             ithNode = ithNode.nextDNode;
-    	}
-    	return ithNode.item;
+        }
+        return ithNode.item;
     }
 
     /** @return the item at the given index. If non-exist @return null.
@@ -120,7 +120,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
         if (index == 0) {
             return startInd.item;
         } else {
-            nextInd = theNode.nextDNode;
+            nextInd = startInd.nextDNode;
             return getRecursive(index - 1, nextInd);
         }
     }
@@ -129,8 +129,8 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
         if (index >= size) {
             return null;
         }
-	DNode item = getRecursive(index, sentiFront.nextDNode);
-	return item;
+        T item = getRecursive(index, sentiFront.nextDNode);
+        return item;
     }
 
     /** Prints the items in the deque from first to last. */
@@ -158,14 +158,14 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
     private class MyLLDIterator implements Iterator<T> {
         private int posi = 0;
         public boolean hasNext() {
-	    return posi < size;
-	}
+            return posi < size;
+        }
         public T next() {
             T returnItem = get(posi);
             posi++;
             return returnItem;
         }
-	}
+    }
     /** implements the iterator method in interface Iterable */
     public Iterator<T> iterator() {
         return new MyLLDIterator();
@@ -201,5 +201,6 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
             }
         }
         return true;
-	}
+    }
 }
+
