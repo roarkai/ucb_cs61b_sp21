@@ -131,12 +131,12 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
 
     /** create class myLLDIterator which implements interface Iterator  */
     private class MyADIterator implements Iterator<T> {
-        private int posi = firstIndex();
+        private int posi = 0;
         public boolean hasNext() {
-            return items[onePosiBack(posi)] != null;
+            return get(posi + 1) != null;
         }
         public T next() {
-            T returnItem = items[onePosiBack(posi)];
+            T returnItem = get(posi);
             posi = onePosiBack(posi);
             return returnItem;
         }
@@ -159,13 +159,12 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
         }
 
         // same class
-        if (this.getClass() != other.getClass()) {
-            System.out.println("different calss.");
+        if (!(other instanceof Deque)) {
             return false;
         }
 
         // same size
-        ArrayDeque<T> target = (ArrayDeque<T>) other;
+        Deque<T> target = (Deque<T>) other;
         if (this.size() != target.size()) {
             return false;
         }
@@ -174,7 +173,7 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
         int startp = this.firstIndex();
         for (int i = 0; i < size; i++) {
             int cmpInd = (startp + i) % capacity;
-            if (!this.items[cmpInd].equals(target.items[cmpInd])) {
+            if (!this.get(i).equals(target.get(i))) {
                 return false;
             }
         }

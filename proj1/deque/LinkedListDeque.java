@@ -183,22 +183,19 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
 		}
 
 		// same class
-		if (this.getClass() != other.getClass()) {
-			System.out.println("different calss.");
+		if (!(other instanceof Deque)) {
 			return false;
 		}
 
 		// same size
-		LinkedListDeque<T> target = (LinkedListDeque<T>) other;
+		Deque<T> target = (Deque<T>) other;
 		if (this.size() != target.size()) {
 			return false;
 		}
 
 		// same elements and order
-		DNode<T> thisNode = this.sentiFront.nextDNode;
-		DNode<T> targNode = target.sentiFront.nextDNode;
-		for (int i = 0; i < size; i++) {
-			if (!thisNode.item.equals(targNode.item)) {
+		for (int i = 0; i < this.size(); i++) {
+			if (this.get(i) != target.get(i)) {
 				return false;
 			}
 		}
