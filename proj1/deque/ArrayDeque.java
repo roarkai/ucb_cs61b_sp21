@@ -28,7 +28,7 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T>{
     /** Inserts item into the position at nextFirst.
      *  If item is null, do nothing. If items is full, double array's capcity. */
     public void addFirst(T item){
-        if(item == null) {
+        if (item == null) {
             return;
         }
 
@@ -47,7 +47,7 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T>{
     /** Inserts item into the back of the Deque.
      *  If item is null, do nothing. @return void.  */
     public void addLast(T item) {
-        if(item == null) {
+        if (item == null) {
             return;
         }
 
@@ -65,7 +65,7 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T>{
     /** Removes and returns the item at the front of the Deque.
      *  @return the items removed. */
     public T removeFirst() {
-        if(size == 0) {
+        if (size == 0) {
             return null;
         }
 
@@ -75,7 +75,7 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T>{
         nextFirst = firstInd;
         size--;
 
-        if(capacity > 8 && size < capacity / resizeFactor) {
+        if (capacity > 8 && size < capacity / resizeFactor) {
             resize(capacity / resizeFactor, firstIndex());
         }
         return firstItem;
@@ -84,7 +84,7 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T>{
     /** Removes and returns the item at the back of the Deque.
      *  @return the items removed.  */
     public T removeLast() {
-        if(size == 0) {
+        if (size == 0) {
             return null;
         }
 
@@ -94,7 +94,7 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T>{
         nextLast = lastInd;
         size--;
 
-        if(capacity > 8 && size < capacity / resizeFactor) {
+        if (capacity > 8 && size < capacity / resizeFactor) {
             resize(capacity / resizeFactor, firstIndex());
         }
         return lastItem;
@@ -103,7 +103,7 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T>{
     /** @return the item at the given index. If non-exist @return null.
      *  0 is the Front, use iterate. */
     public T get(int index) {
-        if(index > size) {
+        if (index > size) {
             return null;
         }
 
@@ -113,7 +113,7 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T>{
 
     /** Prints the items in the deque from first to last. */
     public void printDeque() {
-        if(size == 0) {
+        if (size == 0) {
             return;
         }
 
@@ -149,12 +149,12 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T>{
     @Override
     public boolean equals(Object other) {
         // refer to the same obj on heap
-        if(this == other) {
+        if (this == other) {
             return true;
         }
 
         // special case
-        if(other == null) {
+        if (other == null) {
             return false;
         }
 
