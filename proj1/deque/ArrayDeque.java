@@ -181,7 +181,7 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
         return true;
     }
 
-    public int firstIndex() {
+    private int firstIndex() {
         return onePosiBack(nextFirst);
     }
 
