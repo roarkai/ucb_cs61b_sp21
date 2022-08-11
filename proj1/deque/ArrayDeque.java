@@ -194,8 +194,8 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
     }
 
     /** Helper fuction, given nextLast and size, count the position of nextFirst */
-    private int resetnextLast(int nextFirst) {
-        int nextlastInd = (nextFirst + size + 1) % capacity;
+    private int resetnextLast(int startInd) {
+        int nextlastInd = (startInd + size + 1) % capacity;
         return nextlastInd;
     }
 
@@ -214,3 +214,4 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
         nextLast = resetnextLast(nextFirst);
     }
 }
+
