@@ -2,7 +2,7 @@ package deque;
 
 import java.util.Iterator;
 
-public class ArrayDeque<T> implements Iterable<T>, Deque<T>{
+public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
 
     /** instance variables */
     private int size;
@@ -27,7 +27,7 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T>{
 
     /** Inserts item into the position at nextFirst.
      *  If item is null, do nothing. If items is full, double array's capcity. */
-    public void addFirst(T item){
+    public void addFirst(T item) {
         if (item == null) {
             return;
         }
@@ -94,7 +94,7 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T>{
         nextLast = lastInd;
         size--;
 
-        if (capacity > 8 && size < capacity / resizeFactor) {
+        if (capacity > 8 && size < (capacity / resizeFactor)) {
             resize(capacity / resizeFactor, firstIndex());
         }
         return lastItem;
@@ -118,7 +118,7 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T>{
         }
 
         int firstInd = firstIndex();
-        for(int i = 0; i < size - 1; i++) {
+        for (int i = 0; i < size - 1; i++) {
             System.out.print(items[(firstInd + i) % capacity] + " ");
         }
         System.out.println(items[(firstInd + size - 1) % capacity]);
@@ -197,10 +197,6 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T>{
     /** Helper fuction, given nextLast and size, count the position of nextFirst */
     private int resetnextLast(int nextFirst) {
         return (nextFirst + size + 1) % capacity;
-    }
-    /** Helper fuction, given nextFirst and size, count the position of nextLast */
-    private int resetnextFirst(int nextLast) {
-        return (nextLast + capacity - size - 1) % capacity;
     }
 
     /** Helper function, double the size of the items

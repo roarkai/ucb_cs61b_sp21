@@ -3,16 +3,17 @@ package deque;
 import java.util.Iterator;
 
 public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
-
 	/** nest class DNode, each node has two ref, 
 	 *  one for prevNode, the other for nextNode */
 	private static class DNode<T> {
-		public T item;
-		public DNode<T> prevDNode;
-		public DNode<T> nextDNode;
 
-		// constructor for class DNode
-		public DNode(T value) {
+		// $$the three instance variables should not be public$$
+		private T item;
+		private DNode<T> prevDNode;
+		private DNode<T> nextDNode;
+
+		// constructor for class DNode, $$no need for 'public'$$
+		DNode(T value) {
 			item = value;
 			prevDNode = null;
 			nextDNode = null;
@@ -46,7 +47,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
 	/** Inserts item into the front of the Deque.
 	 *  If item is null, do nothing. @return void.  */
 	@Override
-	public void addFirst(T item){
+	public void addFirst(T item) {
 		if (item == null) {
 			return;
 		} else {
@@ -59,7 +60,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
 	 *  If item is null, do nothing. @return void.  */
 	@Override
 	public void addLast(T item) {
-		if(item == null) {
+		if (item == null) {
 			return;
 		} else {
 			insertNode(item, sentiBack.prevDNode);
@@ -118,11 +119,11 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
     /** @return the item at the given index. If non-exist @return null.
      *  use recursive. */
     public T getRecursive(int index) {
-    	if(index > size) {
+    	if (index > size) {
     		return null;
     	}
 
-        if(index == 0) {
+        if (index == 0) {
         	return sentiFront.nextDNode.item;
         } else {
         	return getRecursive(index - 1);
@@ -132,7 +133,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
 	/** Prints the items in the deque from first to last. */
 	@Override
 	public void printDeque() {
-		if(size == 0) {
+		if (size == 0) {
 			return;
 		}
 
@@ -170,12 +171,12 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
 	@Override
 	public boolean equals(Object other) {
 		// refer to the same obj on heap
-		if(this == other) {
+		if (this == other) {
 			return true;
 		}
 
 		// special case
-		if(other == null) {
+		if (other == null) {
 			return false;
 		}
 
