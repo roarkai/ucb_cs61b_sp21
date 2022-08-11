@@ -170,9 +170,7 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
         }
 
         // same elements and order
-        int startp = this.firstIndex();
         for (int i = 0; i < size; i++) {
-            int cmpInd = (startp + i) % capacity;
             if (!this.get(i).equals(target.get(i))) {
                 return false;
             }
