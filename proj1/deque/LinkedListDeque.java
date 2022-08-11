@@ -123,9 +123,11 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
     		return null;
     	}
 
+		DNode<T> theNode = sentiFront.nextDNode;
         if (index == 0) {
-        	return sentiFront.nextDNode.item;
+        	return theNode.item;
         } else {
+			theNode = theNode.nextDNode;
         	return getRecursive(index - 1);
         }
     }
