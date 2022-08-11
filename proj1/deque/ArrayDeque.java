@@ -2,7 +2,7 @@ package deque;
 
 import java.util.Iterator;
 
-public class ArrayDeque<T> implements Iterable<T> {
+public class ArrayDeque<T> implements Iterable<T>, Deque<T>{
 
     /** instance variables */
     private int size;
@@ -129,11 +129,6 @@ public class ArrayDeque<T> implements Iterable<T> {
         return size;
     }
 
-    /** @return true if deque is empty. */
-    public boolean isEmpty() {
-        return size == 0;
-    }
-
     /** create class myLLDIterator which implements interface Iterator  */
     private class MyADIterator implements Iterator<T> {
         private int posi = firstIndex();
@@ -186,18 +181,19 @@ public class ArrayDeque<T> implements Iterable<T> {
         return true;
     }
 
+    public int firstIndex() {
+        return onePosiBack(nextFirst);
+    }
+
     /** Helper fuction, get the previous index, suppose move circularly */
     private int onePosiForward(int index) {
         return (index + capacity - 1) % capacity;
     }
-
     /** Helper fuction, get the next index, suppose move circularly */
     private int onePosiBack(int index) {
         return (index + 1) % capacity;
     }
-    private int firstIndex() {
-        return onePosiBack(nextFirst);
-    }
+
     /** Helper fuction, given nextLast and size, count the position of nextFirst */
     private int resetnextLast(int nextFirst) {
         return (nextFirst + size + 1) % capacity;

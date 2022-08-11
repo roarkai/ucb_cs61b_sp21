@@ -2,7 +2,7 @@ package deque;
 
 import java.util.Iterator;
 
-public class LinkedListDeque<T> implements Iterable<T> {
+public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
 
 	/** nest class DNode, each node has two ref, 
 	 *  one for prevNode, the other for nextNode */
@@ -45,6 +45,7 @@ public class LinkedListDeque<T> implements Iterable<T> {
 
 	/** Inserts item into the front of the Deque.
 	 *  If item is null, do nothing. @return void.  */
+	@Override
 	public void addFirst(T item){
 		if (item == null) {
 			return;
@@ -56,6 +57,7 @@ public class LinkedListDeque<T> implements Iterable<T> {
 
 	/** Inserts item into the back of the Deque.
 	 *  If item is null, do nothing. @return void.  */
+	@Override
 	public void addLast(T item) {
 		if(item == null) {
 			return;
@@ -75,6 +77,7 @@ public class LinkedListDeque<T> implements Iterable<T> {
 
 	/** Removes and returns the item at the front of the Deque.
 	 *  @return the items removed.  */
+	@Override
     public T removeFirst() {
     	if (size == 0) {
     		return null;
@@ -86,6 +89,7 @@ public class LinkedListDeque<T> implements Iterable<T> {
 
 	/** Removes and returns the item at the back of the Deque.
 	 *  @return the items removed.  */
+	@Override
     public T removeLast() {
         if (size == 0) {
     		return null;
@@ -97,6 +101,7 @@ public class LinkedListDeque<T> implements Iterable<T> {
 
     /** @return the item at the given index. If non-exist @return null.
      *  0 is the Front, use iterate. */
+	@Override
     public T get(int index) {
     	if (index > size) {
     		return null;
@@ -125,6 +130,7 @@ public class LinkedListDeque<T> implements Iterable<T> {
     }
 
 	/** Prints the items in the deque from first to last. */
+	@Override
 	public void printDeque() {
 		if(size == 0) {
 			return;
@@ -139,14 +145,10 @@ public class LinkedListDeque<T> implements Iterable<T> {
 	}
 
     /** @return number if items in the deque. */
+	@Override
     public int size() {
 		return size;
     }
-
-	/** @return true if deque is empty. */
-	public boolean isEmpty() {
-		return size == 0;
-	}
 
 	/** create class myLLDIterator which implements interface Iterator  */
 	private class MyLLDIterator implements Iterator<T> {
