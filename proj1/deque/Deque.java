@@ -1,7 +1,6 @@
 package deque;
 
 public interface Deque<T> {
-
     // $$no need for 'public'
     void addFirst(T item);
     void addLast(T item);

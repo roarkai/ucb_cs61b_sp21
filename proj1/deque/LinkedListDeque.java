@@ -3,9 +3,9 @@ package deque;
 import java.util.Iterator;
 
 public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
-	/** nest class DNode, each node has two ref, 
-	 *  one for prevNode, the other for nextNode */
-	private static class DNode<T> {
+    /** nest class DNode, each node has two ref,
+     *  one for prevNode, the other for nextNode */
+    private static class DNode<T> {
 
 		// $$the three instance variables should not be public$$
 		private T item;
