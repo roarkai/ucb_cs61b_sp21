@@ -6,12 +6,25 @@ import static org.junit.Assert.*;
 
 /** Performs some basic linked list tests. */
 public class LinkedListDequeTest {
-
     @Test
     /** Adds a few things to the list, checking isEmpty() and size() are correct,
      * finally printing the results.
      *
      * && is the "and" operation. */
+    public void sameEleADLLD() {
+        Deque<Integer> ad = new ArrayDeque<>();
+        Deque<Integer> lld = new LinkedListDeque<>();
+
+        for (int i = 0; i < 10; i++) {
+            int randn = i;
+            ad.addFirst(randn);
+            lld.addFirst(randn);
+        }
+
+        boolean same = lld.equals(ad);
+        assertEquals(true, same);
+    }
+
     public void addIsEmptySizeTest() {
         LinkedListDeque<String> lld1 = new LinkedListDeque<String>();
 
@@ -114,8 +127,6 @@ public class LinkedListDequeTest {
 
     @Test
         public void equalLLDStringTest() {
-
-
         LinkedListDeque<String> lld1 = new LinkedListDeque<>();
         LinkedListDeque<String> lld2 = new LinkedListDeque<>();
 
@@ -155,5 +166,18 @@ public class LinkedListDequeTest {
 
         boolean equalstring35 = lld3.equals(lld5);
         assertEquals(false, equalstring35);
+    }
+
+    @Test
+    public void iteratorTest() {
+        LinkedListDeque<String> lld1 = new LinkedListDeque<String>();
+
+        lld1.addFirst("hello");
+        lld1.addFirst("roark");
+        lld1.addFirst("well done");
+
+        for(String s : lld1) {
+            System.out.print(s + " ");
+        }
     }
 }

@@ -6,17 +6,16 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
     /** nest class DNode, each node has two ref,
      *  one for prevNode, the other for nextNode */
     private static class DNode<T> {
-
-		// $$the three instance variables should not be public$$
-		private T item;
-		private DNode<T> prevDNode;
-		private DNode<T> nextDNode;
+        // $$the three instance variables should not be public$$
+        private T item;
+        private DNode<T> prevDNode;
+        private DNode<T> nextDNode;
 
 		// constructor for class DNode, $$no need for 'public'$$
-		DNode(T value) {
-			item = value;
-			prevDNode = null;
-			nextDNode = null;
+        DNode(T value) {
+            item = value;
+            prevDNode = null;
+            nextDNode = null;
 		}
 	}
 
@@ -27,21 +26,21 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
     
     /** Constructor for class LLD. */
     public LinkedListDeque() {
-		size = 0;
-		sentiFront = new DNode<>(null);
-		sentiBack = new DNode<>(null);
-		sentiFront.nextDNode = sentiBack;
-		sentiBack.prevDNode = sentiFront;
+        size = 0;
+        sentiFront = new DNode<>(null);
+        sentiBack = new DNode<>(null);
+        sentiFront.nextDNode = sentiBack;
+        sentiBack.prevDNode = sentiFront;
 	}
 
 	/** Helper method: insert an item after the parameter prev */
-	private void insertNode(T item, DNode<T> prev) {
-		DNode<T> oldnext = prev.nextDNode;
-		DNode<T> newNode = new DNode<>(item);
-		newNode.prevDNode = prev;
-		newNode.nextDNode = oldnext;
-		oldnext.prevDNode = newNode;
-		prev.nextDNode = newNode;
+    private void insertNode(T item, DNode<T> prev) {
+        DNode<T> oldnext = prev.nextDNode;
+        DNode<T> newNode = new DNode<>(item);
+        newNode.prevDNode = prev;
+        newNode.nextDNode = oldnext;
+        oldnext.prevDNode = newNode;
+        prev.nextDNode = newNode;
 	}
 
 	/** Inserts item into the front of the Deque.
@@ -60,32 +59,32 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
 	 *  If item is null, do nothing. @return void.  */
 	@Override
 	public void addLast(T item) {
-		if (item == null) {
-			return;
-		} else {
-			insertNode(item, sentiBack.prevDNode);
-			size++;
-		}
-	}
+        if (item == null) {
+            return;
+        } else {
+            insertNode(item, sentiBack.prevDNode);
+            size++;
+        }
+    }
 
 	/** Helper method: remove an item after the parameter DNode */
-	private T removeNext(DNode<T> prev) {
-		T item = prev.nextDNode.item;
-		prev.nextDNode.nextDNode.prevDNode = prev;
-		prev.nextDNode = prev.nextDNode.nextDNode;
-		return item;
+    private T removeNext(DNode<T> prev) {
+        T item = prev.nextDNode.item;
+        prev.nextDNode.nextDNode.prevDNode = prev;
+        prev.nextDNode = prev.nextDNode.nextDNode;
+        return item;
 	}
 
 	/** Removes and returns the item at the front of the Deque.
 	 *  @return the items removed.  */
 	@Override
     public T removeFirst() {
-    	if (size == 0) {
-    		return null;
-    	}
-    	T first = removeNext(sentiFront);
-    	size--;
-    	return first;
+        if (size == 0) {
+            return null;
+        }
+        T first = removeNext(sentiFront);
+        size--;
+        return first;
     }
 
 	/** Removes and returns the item at the back of the Deque.
@@ -93,11 +92,11 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
 	@Override
     public T removeLast() {
         if (size == 0) {
-    		return null;
+            return null;
     	}
-    	T last = removeNext(sentiBack.prevDNode.prevDNode);
-    	size--;
-    	return last;
+        T last = removeNext(sentiBack.prevDNode.prevDNode);
+        size--;
+        return last;
     }
 
     /** @return the item at the given index. If non-exist @return null.
@@ -134,18 +133,18 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
 
 	/** Prints the items in the deque from first to last. */
 	@Override
-	public void printDeque() {
-		if (size == 0) {
-			return;
-		}
+    public void printDeque() {
+        if (size == 0) {
+            return;
+        }
 
-		DNode<T> node = sentiFront;
-		for (int i = 0; i < size - 1; i++) {
-			node = node.nextDNode;
-			System.out.print(node.item + " ");
-		}
-		System.out.println(node.item);
-	}
+        DNode<T> node = sentiFront;
+        for (int i = 0; i < size - 1; i++) {
+            node = node.nextDNode;
+            System.out.print(node.item + " ");
+        }
+        System.out.println(node.item);
+    }
 
     /** @return number if items in the deque. */
 	@Override
@@ -154,51 +153,51 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
     }
 
 	/** create class myLLDIterator which implements interface Iterator  */
-	private class MyLLDIterator implements Iterator<T> {
-		private int posi = 0;
-		public boolean hasNext() {
+    private class MyLLDIterator implements Iterator<T> {
+        private int posi = 0;
+        public boolean hasNext() {
 			return posi < size;
 		}
-		public T next() {
-			T returnItem = get(posi);
-			posi++;
-			return returnItem;
-		}
+        public T next() {
+            T returnItem = get(posi);
+            posi++;
+            return returnItem;
+        }
 	}
 	/** implements the iterator method in interface Iterable */
-	public Iterator<T> iterator() {
-		return new MyLLDIterator();
-	}
+    public Iterator<T> iterator() {
+        return new MyLLDIterator();
+    }
 
 	@Override
-	public boolean equals(Object other) {
+    public boolean equals(Object other) {
 		// refer to the same obj on heap
-		if (this == other) {
-			return true;
-		}
+        if (this == other) {
+            return true;
+        }
 
 		// special case
-		if (other == null) {
-			return false;
-		}
+        if (other == null) {
+            return false;
+        }
 
 		// same class
-		if (!(other instanceof Deque)) {
-			return false;
-		}
+        if (!(other instanceof Deque)) {
+            return false;
+        }
 
 		// same size
-		Deque<T> target = (Deque<T>) other;
-		if (this.size() != target.size()) {
-			return false;
-		}
+        Deque<T> target = (Deque<T>) other;
+        if (this.size() != target.size()) {
+            return false;
+        }
 
 		// same elements and order
-		for (int i = 0; i < this.size(); i++) {
-			if (this.get(i) != target.get(i)) {
-				return false;
-			}
-		}
-		return true;
+        for (int i = 0; i < this.size(); i++) {
+            if (this.get(i) != target.get(i)) {
+                return false;
+            }
+        }
+        return true;
 	}
 }

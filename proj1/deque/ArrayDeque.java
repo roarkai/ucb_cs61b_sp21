@@ -186,16 +186,19 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
 
     /** Helper fuction, get the previous index, suppose move circularly */
     private int onePosiForward(int index) {
-        return (index + capacity - 1) % capacity;
+        int prevPosi = (index + capacity - 1) % capacity;
+        return prevPosi;
     }
     /** Helper fuction, get the next index, suppose move circularly */
     private int onePosiBack(int index) {
-        return (index + 1) % capacity;
+        int nextPosi = (index + 1) % capacity;
+        return nextPosi;
     }
 
     /** Helper fuction, given nextLast and size, count the position of nextFirst */
     private int resetnextLast(int nextFirst) {
-        return (nextFirst + size + 1) % capacity;
+        int nextlastInd = (nextFirst + size + 1) % capacity;
+        return nextlastInd;
     }
 
     /** Helper function, double the size of the items
