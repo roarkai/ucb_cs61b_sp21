@@ -7,45 +7,45 @@ import static org.junit.Assert.*;
 /** Performs some basic linked list tests. */
 public class LinkedListDequeTest {
     @Test
-    public void testEqual() {
-	int n = 1_000_000;
-	ArrayDeque<Integer> ad = new ArrayDeque<>();
+     public void testEqual1() {
+	int n = 10_000;
+    LinkedListDeque<Integer> lld = new LinkedListDeque<>();
+    LinkedListDeque<Integer> lld2 = new LinkedListDeque<>();
+
+    System.out.println(lld2.size());
+    for (int i = 0; i < n; i++) {
+        lld.addFirst(i);
+        lld2.addLast(n - 1 - i);
+    }
+    int k = 0;
+	for (int item : lld) {
+        boolean x2 = (item == (int)lld2.get(k));
+        assertEquals(true, x2);
+        k++;
+	}
+    }
+
+    @Test
+    public void testEqual2() {
+	int n = 10_000;
     LinkedListDeque<Integer> lld = new LinkedListDeque<>();
     LinkedListDeque<Integer> lld2 = new LinkedListDeque<>();
 
     int size = 0;
     System.out.print(size + " ");
-    System.out.print(ad.size() + " ");
     System.out.print(lld.size() + " ");
     System.out.println(lld2.size());
     for (int i = 0; i < n; i++) {
         int flag = (int)(Math.random() * 2);
-	    int randn = (int)(Math.random() * 100);
-        if (flag == 0) {
-	        ad.addFirst(randn);
-	        lld.addFirst(randn);
-            lld2.addFirst(randn);
-            size++;
-        } else {
-            ad.removeLast();
-            lld.removeLast();
-            lld2.removeLast();
-            if (size == 0) {
-                continue;
-            } else {
-                size--;
-            }
-        }
+	    int randn = (int)(Math.random() * 1000);
+        lld.addFirst(randn);
+        lld2.addFirst(randn);
+        size++;
     }
-    System.out.print(size + " ");
-    System.out.print(ad.size() + " ");
-    System.out.print(lld.size() + " ");
-    System.out.println(lld2.size());
+
     int k = 0;
-	for (int item : ad) {
-        boolean x1 = (item == (int)lld.get(k));
+	for (int item : lld) {
         boolean x2 = (item == (int)lld2.get(k));
-        assertEquals(true, x1);
         assertEquals(true, x2);
         k++;
 	}
