@@ -103,7 +103,7 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
     /** @return the item at the given index. If non-exist @return null.
      *  0 is the Front, use iterate. */
     public T get(int index) {
-        if (index > size) {
+        if (index >= size || index < 0) {
             return null;
         }
 

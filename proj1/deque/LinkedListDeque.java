@@ -102,7 +102,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
      *  0 is the Front, use iterate. */
     @Override
     public T get(int index) {
-        if (index > size) {
+        if (index >= size  || index < 0) {
             return null;
         }
 
