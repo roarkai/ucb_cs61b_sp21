@@ -31,9 +31,6 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
         if (item == null) {
             return;
         }
-
-        items[nextFirst] = item;
-        size++;
         if (size == capacity) {
             // resize and reset the position of nextFirst and nextLast
             resize(size * 2, nextFirst);
@@ -41,7 +38,8 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
             // just update index of nextFirst and nextLast, forward <-
             nextFirst = onePosiForward(nextFirst);
         }
-
+        items[nextFirst] = item;
+        size++;
     }
 
     /** Inserts item into the back of the Deque.
@@ -50,9 +48,6 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
         if (item == null) {
             return;
         }
-
-        items[nextLast] = item;
-        size++;
         if (size == capacity) {
             // resize and reset the position of nextFirst and nextLast
             resize(size * 2, firstIndex());
@@ -60,6 +55,8 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
             // just update index of nextLast, back ->
             nextLast = onePosiBack(nextLast);
         }
+        items[nextLast] = item;
+        size++;	
     }
 
     /** Removes and returns the item at the front of the Deque.
