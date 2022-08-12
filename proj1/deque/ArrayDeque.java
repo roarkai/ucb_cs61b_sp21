@@ -133,11 +133,11 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
     private class MyADIterator implements Iterator<T> {
         private int posi = 0;
         public boolean hasNext() {
-            return get(posi + 1) != null;
+            return posi < size;
         }
         public T next() {
             T returnItem = get(posi);
-            posi = onePosiBack(posi);
+            posi++;
             return returnItem;
         }
     }
