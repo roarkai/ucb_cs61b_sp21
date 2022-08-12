@@ -170,7 +170,7 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
         }
 
         // same elements and order
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < this.size(); i++) {
             if (!this.get(i).equals(target.get(i))) {
                 return false;
             }

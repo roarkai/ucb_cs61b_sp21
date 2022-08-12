@@ -7,6 +7,64 @@ import static org.junit.Assert.*;
 /** Performs some basic linked list tests. */
 public class LinkedListDequeTest {
     @Test
+    public void testEqual() {
+	int n = 1_000_000;
+	ArrayDeque<Integer> ad = new ArrayDeque<>();
+    LinkedListDeque<Integer> lld = new LinkedListDeque<>();
+    LinkedListDeque<Integer> lld2 = new LinkedListDeque<>();
+
+    int size = 0;
+    System.out.print(size + " ");
+    System.out.print(ad.size() + " ");
+    System.out.print(lld.size() + " ");
+    System.out.println(lld2.size());
+    for (int i = 0; i < n; i++) {
+        int flag = (int)(Math.random() * 2);
+	    int randn = (int)(Math.random() * 100);
+        if (flag == 0) {
+	        ad.addFirst(randn);
+	        lld.addFirst(randn);
+            lld2.addFirst(randn);
+            size++;
+        } else {
+            ad.removeLast();
+            lld.removeLast();
+            lld2.removeLast();
+            if (size == 0) {
+                continue;
+            } else {
+                size--;
+            }
+        }
+    }
+    System.out.print(size + " ");
+    System.out.print(ad.size() + " ");
+    System.out.print(lld.size() + " ");
+    System.out.println(lld2.size());
+    int k = 0;
+	for (int item : ad) {
+        boolean x1 = (item == (int)lld.get(k));
+        boolean x2 = (item == (int)lld2.get(k));
+        assertEquals(true, x1);
+        assertEquals(true, x2);
+        k++;
+	}
+    }
+
+    @Test
+    public void testGetRecursive() {
+        LinkedListDeque<Integer> lld = new LinkedListDeque<>();
+        int n = 10;
+        for (int i = 0; i < n; i++) {
+            int randn = i;
+            lld.addFirst(randn);
+        }
+        for (int i = 0; i < n; i++) {
+            System.out.print(i + " = " + lld.getRecursive(i) + " -> reference ans: ");
+            System.out.println(i + " = " + lld.get(i));
+        }
+    }
+    @Test
     /** Adds a few things to the list, checking isEmpty() and size() are correct,
      * finally printing the results.
      *
